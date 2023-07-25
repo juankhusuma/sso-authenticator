@@ -35,6 +35,38 @@ definitions:
         type: integer
         x-order: "01"
     type: object
+  httpserver.Response-array_siaklib_Course:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/siaklib.Course'
+        type: array
+        x-order: "03"
+      message:
+        default: Success
+        type: string
+        x-order: "02"
+      status:
+        default: 200
+        type: integer
+        x-order: "01"
+    type: object
+  httpserver.Response-array_siaklib_CourseComponent:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/siaklib.CourseComponent'
+        type: array
+        x-order: "03"
+      message:
+        default: Success
+        type: string
+        x-order: "02"
+      status:
+        default: 200
+        type: integer
+        x-order: "01"
+    type: object
   httpserver.Response-httpserver_CookieData:
     properties:
       data:
@@ -119,6 +151,41 @@ definitions:
       term:
         type: string
     type: object
+  siaklib.Course:
+    properties:
+      class_name:
+        type: string
+      code:
+        type: string
+      credits:
+        type: integer
+      lecturers:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+      period:
+        type: string
+      rooms:
+        items:
+          type: string
+        type: array
+      schedule:
+        items:
+          type: string
+        type: array
+    type: object
+  siaklib.CourseComponent:
+    properties:
+      name:
+        type: string
+      score:
+        description: May be "Kosong", so lets just make it string lol
+        type: string
+      weight:
+        type: string
+    type: object
   siaklib.Homepage:
     properties:
       news:
@@ -185,6 +252,8 @@ definitions:
   siaklib.SubjectScore:
     properties:
       class:
+        type: string
+      class_id:
         type: string
       code:
         type: string
@@ -270,7 +339,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/httpserver.Response-siaklib_StudentSummary'
+            $ref: '#/definitions/httpserver.Response-array_siaklib_Course'
         "401":
           description: Unauthorized
           schema:
@@ -303,7 +372,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/httpserver.Response-siaklib_StudentSummary'
+            $ref: '#/definitions/httpserver.Response-array_siaklib_CourseComponent'
         "401":
           description: Unauthorized
           schema:
@@ -356,10 +425,6 @@ paths:
       produces:
       - application/json
       responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/httpserver.Response-siaklib_StudentSummary'
         "401":
           description: Unauthorized
           schema:

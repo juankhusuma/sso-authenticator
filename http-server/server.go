@@ -88,13 +88,6 @@ func (s *Server) Start() error {
 
 	s.Router.Post("/login", Login)
 	s.Router.Get("/me", BaseHandler("https://academic.ui.ac.id/main/Welcome/", Me))
-	s.Router.Get("/home", BaseHandler("https://academic.ui.ac.id/main/Welcome/", Home))
-	s.Router.Get("/photo", BaseHandler("https://academic.ui.ac.id/main/Academic/UserPhoto", UserPhoto))
-
-	s.Router.Get("/academic/summary", BaseHandler("https://academic.ui.ac.id/main/Academic/Summary", AcademicSummary))
-	s.Router.Get("/academic/history", BaseHandler("https://academic.ui.ac.id/main/Academic/HistoryByTerm", AcademicHistory))
-	s.Router.Get("/academic/classes", BaseHandler("https://academic.ui.ac.id/main/CoursePlan/CoursePlanViewClass", CourseClasses))
-	s.Router.Get("/academic/course/:courseId<int>", CourseComponent)
 
 	s.Router.Get("/swagger/*", swagger.New(swagger.Config{
 		CustomStyle: template.CSS(darkModeCss),
